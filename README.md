@@ -15,7 +15,7 @@ This is inteted to be used as a command line display.
 
 ## Samples
 
-```rs
+```rust
 let a = procedure::proceed("Download", "example_file.jpg", |progress| -> Result<&str, &str> {
     for _ in 0..100 {
         std::thread::sleep(std::time::Duration::from_millis(10));
