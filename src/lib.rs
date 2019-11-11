@@ -57,26 +57,26 @@ impl<'a> Progress<'a> {
 
 /// Proceeds the execution of `function` with a nice formatted `action`.
 /// The default padding is 12.
-pub fn proceed<F, R, E>(action: &str, description: &str, function: F) -> Result<R, E> where
-    F: FnOnce(&mut Progress) -> Result<R, E>,
-    R: Display,
+pub fn proceed<F, R, D, E>(action: &str, description: &str, function: F) -> Result<R, E> where
+    F: FnOnce(&mut Progress) -> Result<(R, D), E>,
+    D: Display,
     E: Display
 {
     proceed_with_padding(action, description, function, 12)
 }
 
 /// Proceeds the execution of `function` with a nice formatted `action` given a left `padding`.
-pub fn proceed_with_padding<F, R, E>(action: &str, description: &str, function: F, padding: usize) -> Result<R, E> where
-    F: FnOnce(&mut Progress) -> Result<R, E>,
-    R: Display,
+pub fn proceed_with_padding<F, R, D, E>(action: &str, description: &str, function: F, padding: usize) -> Result<R, E> where
+    F: FnOnce(&mut Progress) -> Result<(R, D), E>,
+    D: Display,
     E: Display
 {
     let mut progress = Progress::new(action, description, padding);
     progress.initialize();
     match function(&mut progress) {
         Ok(result) => {
-            progress.ok(&result);
-            Ok(result)
+            progress.ok(&result.1);
+            Ok(result.0)
         },
         Err(error) => {
             progress.err(&error);
