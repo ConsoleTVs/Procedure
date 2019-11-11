@@ -2,6 +2,13 @@
 name = "procedure"
 version = "0.1.0"
 authors = ["Erik Campobadal <soc@erik.cat>"]
+description = "Procedure allows to execute tasks with a visual indication to the end user in the stdout."
+keywords = ["procedure", "task", "visual", "indicator", "stdout", "terminal"]
+categories = ["command-line-interface", "command-line-utilities", "visualization"]
+homepage = "https://erik.cat"
+repository = "https://github.com/ConsoleTVs/Procedure"
+readme = "README.md"
+license = "MIT"
 edition = "2018"
 
 [dependencies]
