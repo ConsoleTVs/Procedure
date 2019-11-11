@@ -16,15 +16,15 @@ This is inteted to be used as a command line display.
 ## Samples
 
 ```rust
-let a = procedure::proceed("Download", "example_file.jpg", |progress| -> Result<&str, &str> {
+let a = proceed("Download", "example_file.jpg", |progress: &mut Progress| -> Result<(&str, &str), &str> {
     for _ in 0..100 {
         std::thread::sleep(std::time::Duration::from_millis(10));
         progress.increment(1);
     }
-    Ok("example_file.jpg [256 KB]")
+    Ok(("256KB", "example_file.jpg [256 KB]"))
 });
-assert_eq!(a.unwrap(), "example_file.jpg [256 KB]");
-let b = procedure::proceed("Download", "some_other.zip", |progress| -> Result<&str, &str> {
+assert_eq!(a.unwrap(), "256KB");
+let b = proceed("Download", "some_other.zip", |progress: &mut Progress| -> Result<(&str, &str), &str> {
     let min = 500;
     let max = 1000;
     for i in min..max {
@@ -34,7 +34,7 @@ let b = procedure::proceed("Download", "some_other.zip", |progress| -> Result<&s
             return Err("some_other.zip [Failed]");
         }
     }
-    Ok("some_other.zip [1 MB]")
+    Ok(("1MB", "some_other.zip [1 MB]"))
 });
 assert_eq!(b.unwrap_err(), "some_other.zip [Failed]");
 ```

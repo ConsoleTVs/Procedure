@@ -1,6 +1,6 @@
 [package]
 name = "procedure"
-version = "0.2.0"
+version = "0.2.1"
 authors = ["Erik Campobadal <soc@erik.cat>"]
 description = "Procedure allows to execute tasks with a visual indication to the end user in the stdout."
 keywords = ["procedure", "task", "visual", "indicator", "terminal"]
